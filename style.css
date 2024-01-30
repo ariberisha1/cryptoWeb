@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+
 * {
     box-sizing: border-box;
 }
@@ -135,11 +136,13 @@ input:focus-visible {
 }
 
 @keyframes show {
+
     0%,
     49.99% {
         opacity: 0;
         z-index: 1;
     }
+
     50%,
     100% {
         opacity: 1;
@@ -231,18 +234,20 @@ a.social:hover {
     background: linear-gradient(to right, #ff4b2b, #ff416c);
     color: #fff;
 }
+
 .sing-up-container #name_error,
 .sing-up-container #email_error,
-.sing-up-container #password_error{
-font-size: 12px ;
-color: #C62828;
-text-align: center;
-display: none;
+.sing-up-container #password_error {
+    font-size: 12px;
+    color: #C62828;
+    text-align: center;
+    display: none;
 }
+
 .sing-in-container #email_error2,
-.sing-in-container #password_error2{
-font-size: 12px ;
-color: #C62828;
-text-align: center;
-display: none;
+.sing-in-container #password_error2 {
+    font-size: 12px;
+    color: #C62828;
+    text-align: center;
+    display: none;
 }
