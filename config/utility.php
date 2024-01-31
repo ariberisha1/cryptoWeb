@@ -24,14 +24,23 @@ class utility{
     }
     public function redirecthome(){
         if(!(empty($_SESSION['user_id']))){
-            header("Location: /home");
+            header("Location: /manage/index.php");
             exit();
         }
     }
     public function redirectlogin(){
         if(empty($_SESSION['user_id'])){
-            header("Location: /login");
+            header("Location: /login.php");
             exit();
+        }
+    }
+    public function headerbuttonat(){
+        if($_SESSION['roli'] === 'admin'){
+            echo '<a class="link-head" href="/home">Home</a>';
+            echo '<a class="link-head" href="/userlist">Lista e Klienteve</a>'; 
+            echo '<a class="link-head" href="/postlist">Lista e postev</a>';
+        }else{
+            echo '<a class="link-head" href="/home">Home</a>';
         }
     }
 }
