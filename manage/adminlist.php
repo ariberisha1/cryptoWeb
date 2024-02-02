@@ -1,11 +1,17 @@
 <?php
 
 $user = new Users;
-$info = $user->fetchAllByRole('user');
+$info = $user->fetchAllByRole('admin');
 
 $nr = 0;
+
+
 if(isset($_GET['deleteuserbyid'])){
-    $user->deleteuser($_GET['deleteuserbyid'],'user');
+    if($_GET['deleteuserbyid'] == $_SESSION['user_id']){
+        utility::setmessage('error', 'Nuk mundesh me fshi veten!', '/manage/index.php');
+        exit();
+    }
+    $user->deleteuser($_GET['deleteuserbyid'],'admin');
 }
 ?>
 
@@ -13,7 +19,7 @@ if(isset($_GET['deleteuserbyid'])){
 <div class="page-head">
     <table align="center" width="73%">
         <td>
-            <font class="title-head">Lista e Userave
+            <font class="title-head">Lista e Adminave
         </td>
     </table>
 </div>
@@ -25,10 +31,10 @@ if(isset($_GET['deleteuserbyid'])){
         <table align="center" width="95%">
             <tr>
                 <td>
-                    <h3 style="margin: 1px; margin-bottom: 6px;"><i class="fas fa-user-edit"></i>&nbsp;Lista e Userave <i class="fas fa-angle-down"></i></h3>
+                    <h3 style="margin: 1px; margin-bottom: 6px;"><i class="fas fa-user-edit"></i>&nbsp;Lista e Adminave <i class="fas fa-angle-down"></i></h3>
                     <div style="padding:2px;">
                         <font>
-                            K&euml;tu mund&euml; t&euml; shikoni userat, ku mund ti modifikoni ata!<br>
+                            K&euml;tu mund&euml; t&euml; shikoni adminat, ku mund ti modifikoni ata!<br>
                         </font>
                     </div>
             </tr>
@@ -47,18 +53,15 @@ if(isset($_GET['deleteuserbyid'])){
                         <th width="120px" style="text-align: left;"></th>
                     </tr>
                 </thead>
-
-                <?php
-                foreach ($info as $user) : ?>
+                <?php foreach ($info as $user) : ?>
                     <tr>
                         <td style="text-align:center;"><b><?php echo ++$nr; ?></b></td>
                         <td style="text-align:left;"><b><?php echo $user['name'] ?></b></td>
                         <td style="text-align:left;"><b><?php echo $user['surname'] ?></b></td>
                         <td style="text-align:left;"><b><?php echo $user['email'] ?></b></td>
-                        <td> <button type="submit" onclick="window.location.href='/manage/userlist.php?type=user&deleteuserbyid=<?php echo $user['id'] ?>'" class="btndefaultred"><i class="fas fa-trash"></i> Delete </button></td>
+                        <td> <button type="submit" onclick="window.location.href='/manage/userlist.php?type=admin&deleteuserbyid=<?php echo $user['id'] ?>'" class="btndefaultred"><i class="fas fa-trash"></i> Delete </button></td>
                     </tr>
                 <?php endforeach;
                 if ($nr == 0) {
-                    echo '<tr><td style="text-align:center" colspan="11">Nuk ka asnje user ne list.</td></tr>';
-                }
-                ?>
+                    echo '<tr><td style="text-align:center" colspan="11">Nuk ka asnje admin ne list.</td></tr>';
+                } ?>
