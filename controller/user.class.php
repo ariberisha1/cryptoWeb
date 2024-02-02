@@ -57,6 +57,11 @@ class userController
         if (isset($_POST['changepw'])) {
             $this->password = $_POST['password'];
             $this->newpw = $_POST['newpw'];
+
+            $this->emptyInfo('changepw');
+            $this->checkPassword();
+            $this->userModel->changePassProfile($this->newpw);
+
         }
     }
 
@@ -71,6 +76,11 @@ class userController
             }
         } else if ($type == 'profili') {
             if (empty($this->name) || empty($this->surname) || empty($this->email)) {
+                utility::setmessage('error', 'Te dhenat mos i lini te zbrazeta!', '/manage/profile.php');
+                exit();
+            }
+        } else if ($type == 'changepw') {
+            if (empty($this->password) || empty($this->newpw)) {
                 utility::setmessage('error', 'Te dhenat mos i lini te zbrazeta!', '/manage/profile.php');
                 exit();
             }
@@ -95,6 +105,12 @@ class userController
                 utility::setmessage('error', 'Ky email eshte i zene!', '/login.php');
                 exit();
             }
+        }
+    }
+    private function checkPassword(){
+        if($this->password != $this->newpw){
+            utility::setmessage('error', 'Fjalkalimi nuk eshte perseritur mir!', '/manage/profile.php');
+            exit();
         }
     }
 }
